@@ -1,0 +1,5 @@
+.gallery-item {
+  display: inline-block;
+  flex-direction: row;
+  margin-right: 20px;
+}
