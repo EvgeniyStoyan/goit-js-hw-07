@@ -26,11 +26,12 @@ const images = [
   },
 ];
 
-const ulEl = document.querySelector('#gallery');
+const makeElImgInLi = attributes => {
+  const { url, alt } = attributes;
+  return `
+  <li class = "gallery-item"><img src = "${url}" alt = "${alt}"  width = "350" height = "270" /></li>`;
+};
 
-images.forEach(attributes => {
-  ulEl.insertAdjacentHTML(
-    'beforeend',
-    `<li class = "gallery-item"><img src = "${attributes.url}" alt = "${attributes.alt}"  width = "350" height = "270" /></li>`,
-  );
-});
+const ulEl = document.querySelector('#gallery');
+const makeImgInLi = images.map(makeElImgInLi).join('');
+ulEl.insertAdjacentHTML('beforeend', makeImgInLi);

@@ -19,33 +19,41 @@
 
 // <div id="boxes"></div>
 
-const renderEl = document.querySelector('[data-action="render"]');
-const destroyEl = document.querySelector('[data-action="destroy"]');
-const boxesEl = document.getElementById('#boxes');
-renderEl.addEventListener('click', getAmount);
-destroyEl.addEventListener('click', destroyBoxes);
+const renderEl = document.querySelector('#controls [data-action="render"]');
+const destroyEl = document.querySelector('#controls [data-action="destroy"]');
+const boxes = document.getElementById('boxes');
+const inputValue = document.querySelector('input');
 
-function getAmount() {
-  const amount = document.querySelector('#controls input').value;
-  createBoxes(amount);
-}
+let amount = '';
+inputValue.addEventListener('change', elem => {
+  elem.target.value;
+});
 
 function createBoxes(amount) {
+  removeCreate();
+  amount = inputValue.value;
   const basicSize = 30;
-  const fragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i += 1) {
     const size = basicSize + i * 10;
     const div = document.createElement('div');
     div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${random()} , ${random()} , ${random()} )`;
-    fragment.appendChild(div);
+    boxes.appendChild(div);
+    inputValue.value = '';
   }
-  boxes.appendChild(fragment);
-}
-
-function destroyBoxes() {
-  boxes.innerHTML = '';
 }
 
 function random() {
   return Math.floor(Math.random() * 256);
 }
+
+const removeCreate = () => {
+  while (boxes.firstChild) {
+    boxes.removeChild(boxes.firstChild);
+  }
+};
+
+renderEl.addEventListener('click', () => {
+  createBoxes(amount);
+});
+
+destroyEl.addEventListener('click', removeCreate);

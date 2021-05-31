@@ -19,11 +19,11 @@ const inputLength = validInput.dataset.length;
 validInput.addEventListener('change', currentVal => {
   const currentValEl = currentVal.target.value;
 
-  if (currentValEl.length > inputLength) {
+  if (currentValEl.length === +inputLength) {
+    validInput.classList.add('valid');
+    validInput.classList.remove('invalid');
+  } else {
     validInput.classList.remove('valid');
     validInput.classList.add('invalid');
-  } else {
-    validInput.classList.remove('invalid');
-    validInput.classList.add('valid');
   }
 });
